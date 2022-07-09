@@ -1,0 +1,40 @@
+.submit-button{
+    float: right;
+    font-family: cursive;
+}
+
+p{
+    font-family: cursive;
+}
+
+.body{
+    margin-top: 60px;
+}
+thead tr th {
+    width: 1000px;
+}
+
+h3{
+    text-align: center;
+    font-family: cursive;
+    color: white;
+}
+body{
+    background-color: #e0e0e0 !important;
+}
+
+form{
+    background-color: white;
+    width: 500px;
+    font-family: cursive;
+    margin: auto;
+    padding: 20px 40px 40px 20px;
+    border-radius: 20px;
+}
+
+label{
+    font: bolder;
+}
+a{
+    font-family: cursive;
+}
