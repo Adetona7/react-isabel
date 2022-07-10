@@ -11,6 +11,7 @@ function Addstaff() {
         phone: '',
         email: '',
         password: '',
+        // image_name: '',
         error_list: [],
     });
     const [errorMessages, setErrorMessages] = useState({})
@@ -30,6 +31,7 @@ function Addstaff() {
         data.append('phone', staffInput.phone);
         data.append('email', staffInput.email);
         data.append('password', staffInput.password);
+        // data.append('image_name', staffInput.image_name);
         
         var config = {
           method: 'post',
@@ -54,6 +56,7 @@ function Addstaff() {
                 phone: '',
                 email: '',
                 password: '',
+                // image_name: '',
                 errorMessages: []
             })
             
@@ -85,9 +88,9 @@ function Addstaff() {
                     <form onSubmit={saveStaff}> 
 
                         {/* <div className="field"> 
-                        <label>Staff Id</label>			          
-                        <input type="text" placeholder="Staff Id" name="staffid" id="staffid" onChange={handleInput} value={staffInput.staffid} required/>
-                        <span className="ui red">{errorMessages?.staffid}</span>
+                        <label>Upload Image</label>			          
+                        <input type="file" name="image_name" onChange={handleInput} value={staffInput.image_name} />
+                        <span className="ui red">{errorMessages?.image_name}</span>
                         </div> */}
 
                         <div className="field">
@@ -120,7 +123,7 @@ function Addstaff() {
                         <span className="ui red">{errorMessages?.password}</span>
                         </div>  
 
-                        <button type="submit" className="ui primary button">Save Staff</button>
+                        <button type="submit" className="btn btn-primary">Save Staff</button>
 
                     </form>
                 </div>                    

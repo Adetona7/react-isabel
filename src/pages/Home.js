@@ -29,6 +29,7 @@ function Home() {
                 <div className="ui container">                
                     <p className="header item">All Staff</p>
                     <a className="ui primary button" href='/Addstaff'>Add Staff</a>                                                   
+                    <a className="ui red button" href='/Logout'>Logout</a>                                                   
                 </div>
             </div>
             <div className="ui container body">

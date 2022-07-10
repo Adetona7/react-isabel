@@ -12,7 +12,7 @@ function Stafflist({ staffs, data2, data3 }){
                     <tr>
                         <th style={{ width: "50px", textAlign: "center" }}>#</th>
                         <th>Staff Id</th>
-                        <th>Name</th>
+                        <th>Full Name</th>
                         <th>E-mail</th>
                         <th>Action</th>
                     </tr>

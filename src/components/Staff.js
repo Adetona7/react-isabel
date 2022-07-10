@@ -29,10 +29,10 @@ class Staff extends Component {
             <tr>
                 <td style={{ textAlign: "center" }}>{id}</td>
                 <td>{staffid}</td>
-                <td>{`${fname} ${lname}`}</td>
+                <td>{`${lname} ${fname}`}</td>
                 <td>{email}</td>
                 <td>
-                    <a href={`/editstaff/${id}`} className="mini ui primary button">Edit</a>
+                    <a href={`/viewstaff/${id}`} className="mini ui primary button">View</a>
                     <button onClick={(e) => deleteStudent(e, id)} className="mini ui red button">Delete</button>
                 </td>
             </tr>

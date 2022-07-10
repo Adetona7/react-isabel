@@ -1,15 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import "./app.css";
-import Editform from './Editform';
+import Viewform from './Viewform';
 import Loader from './Loader';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 
-function Editstaff() { 
+function Viewstaff() { 
     const { id } = useParams();
     console.log(id);
     const [staff, setStaff] = useState([]);
@@ -42,7 +40,7 @@ function Editstaff() {
             </div>
             <div className="ui container body">            
                 <div className="ui form">
-                    <Editform staff={staff}/>
+                    <Viewform staff={staff}/>
                 </div>
             </div>
         </div>
@@ -50,4 +48,4 @@ function Editstaff() {
 
 }
 
-export default Editstaff;
+export default Viewstaff;
