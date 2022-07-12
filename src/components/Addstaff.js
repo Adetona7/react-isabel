@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import "./app.css";
 import swal from 'sweetalert2';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 function Addstaff() {
+    const navigate = useNavigate();
     const [staffInput, setStaff] = useState({
-        // staffid: '',
         fname: '',
         lname: '',
         phone: '',
         email: '',
         password: '',
-        // image_name: '',
         error_list: [],
     });
     const [errorMessages, setErrorMessages] = useState({})
@@ -25,13 +25,11 @@ function Addstaff() {
         e.preventDefault();
         var axios = require('axios');
         var data = new FormData();
-        // data.append('staffid', staffInput.staffid);
         data.append('fname', staffInput.fname);
         data.append('lname', staffInput.lname);
         data.append('phone', staffInput.phone);
         data.append('email', staffInput.email);
         data.append('password', staffInput.password);
-        // data.append('image_name', staffInput.image_name);
         
         var config = {
           method: 'post',
@@ -46,38 +44,34 @@ function Addstaff() {
         .then(function (response) {
           console.log(response);
 
-
         if(response.status === 200){
             swal.fire("Sucessful",response.data.message,"success");
             setStaff({
-                // staffid: '',
                 fname: '',
                 lname: '',
                 phone: '',
                 email: '',
                 password: '',
-                // image_name: '',
                 errorMessages: []
-            })
+            });
+            navigate('/home');
             
         }
-        else if(response.status === 400)
+        else if(response.status === 401)
         {
-            // swal.fire("Error",response.data.message,"error");
+            swal.fire("Warning",response.data.message,"warning");
             console.log(response)
             setStaff({...staffInput, error_list: response.data.validate_err });
         }
         }).catch(err => {
-            // console.log(err.response.data.validate_err)
             setErrorMessages(err.response.data.validate_err)
         });
     }
 
-
     return (
         <div className="design">
             <div className="ui fixed inverted menu">
-                <div className="ui container">                
+                <div className="container">                
                     <p className="header item">Registration Form</p>
                     <a className='ui primary button' href='/Home'>Go back</a>                                               
                 </div>
@@ -86,12 +80,6 @@ function Addstaff() {
             <div className="ui container body">            
                 <div className="ui form">
                     <form onSubmit={saveStaff}> 
-
-                        {/* <div className="field"> 
-                        <label>Upload Image</label>			          
-                        <input type="file" name="image_name" onChange={handleInput} value={staffInput.image_name} />
-                        <span className="ui red">{errorMessages?.image_name}</span>
-                        </div> */}
 
                         <div className="field">
                         <label>First Name</label>   				         

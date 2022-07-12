@@ -6,9 +6,20 @@ import Addstaff from './Addstaff';
 import Viewstaff from './Viewstaff';
 import Register from './Register';
 import Login from './Login';
+import Image from './Image';
 import axios from 'axios';
-axios.defaults.baseURL = "http://127.0.0.1:8000/";
+import Viewform from './Viewform';
 
+axios.defaults.baseURL = "http://127.0.0.1:8000/";
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Accept'] = 'application/json';
+
+axios.defaults.withCredentials = true;
+axios.interceptors.request.use(function (config){
+    const token = localStorage.getItem('access_token');
+    config.headers.Authorization = token ? `Bearer ${token}` : '';
+    return config;
+})
 
 export default function App() {    
     return(
@@ -18,7 +29,9 @@ export default function App() {
                 <Route path='/addstaff' element={<Addstaff />} ></Route>
                 <Route path='/home' element={<Home />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/image/:id' element={<Image />} />
                 <Route path='*' element={<Login />} />
+                <Route path='/' element={<Login />} />
             </Routes>
         </BrowserRouter>
     );

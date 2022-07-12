@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 import Stafflist from '../components/Stafflist';
 import Loader from '../components/Loader';
 
+
 function Home() {
     const [staff, setStaff] = useState([]);
+    const navigate = useNavigate();
     const [loader, setLoader] = useState(false);
     const [url, setURL] = useState("http://127.0.0.1:8000/api/staff");
 
@@ -19,8 +23,38 @@ function Home() {
         });
     }, [])
 
+
     if(loader){
         return <Loader />
+    } 
+
+    const logoutSubmit = (e) => {
+        e.preventDefault();
+
+        var axios = require('axios');
+
+        var config = {
+        method: 'post',
+        url: 'http://localhost:8000/api/logout',
+        headers: { 
+            'Accept': 'application/json', 
+        }
+        };
+
+        axios(config)
+        .then(response => {
+        console.log(response);
+
+        if(response.data.status === 200){
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('auth_name');
+            Swal.fire("Successful",response.data.message,"success");
+            navigate('/');
+        }
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
     }    
 
     return (
@@ -29,7 +63,7 @@ function Home() {
                 <div className="ui container">                
                     <p className="header item">All Staff</p>
                     <a className="ui primary button" href='/Addstaff'>Add Staff</a>                                                   
-                    <a className="ui red button" href='/Logout'>Logout</a>                                                   
+                    <button type="button" onClick={logoutSubmit} className="btn btn-danger" href='/Logout'>Logout</button>                                                   
                 </div>
             </div>
             <div className="ui container body">
@@ -38,4 +72,5 @@ function Home() {
         </div>
   )
 }
+
 export default Home

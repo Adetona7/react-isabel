@@ -12,7 +12,8 @@ function Viewstaff() {
     console.log(id);
     const [staff, setStaff] = useState([]);
     const [loader, setLoader] = useState(false);
-    const [url, setURL] = useState(`http://127.0.0.1:8000/api/findstaffid/${id}`);
+    const [url, setUrl] = useState(`http://127.0.0.1:8000/api/findstaffid/${id}`);
+
 
     useEffect(()=>{
         setLoader(true);
@@ -28,7 +29,6 @@ function Viewstaff() {
     if(loader){
         return <Loader />
     }
-
     
     return (
         <div className="design">  
@@ -45,7 +45,6 @@ function Viewstaff() {
             </div>
         </div>
     );
-
 }
 
 export default Viewstaff;

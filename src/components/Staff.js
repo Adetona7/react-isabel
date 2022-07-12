@@ -4,24 +4,38 @@ import swal from "sweetalert2";
 
 class Staff extends Component {
     render() { 
-        const deleteStudent = (e, id) => {
-            e.preventDefault();
-            
-            const thisClicked = e.currentTarget;
-            thisClicked.innerText = "Deleting";
-    
-            axios.delete(`http://127.0.0.1:8000/api/staffdelete/${id}`).then(response=>{
-                if(response.data.status === 200)
-                {
-                    swal.fire("Deleted!",response.data.message,"success");
-                    thisClicked.closest("tr").remove();
-                }
-                else if(response.data.status === 404)
-                {
-                    swal.fire("Error",response.data.message,"error");
-                    thisClicked.innerText = "Delete";
-                }
+        const deleteStudent = async (e, id) => {
+        e.preventDefault();
+        
+        const thisClicked = e.currentTarget;
+        const isConfirm = await swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            return result.isConfirmed
             });
+    
+            if(!isConfirm){
+            return;
+            }
+    
+            await axios.delete(`http://127.0.0.1:8000/api/staffdelete/${id}`).then(({data})=>{
+                swal.fire({
+                    icon:"success",
+                    text:data.message
+                })
+                thisClicked.closest("tr").remove();
+            }).catch(({response:{data}})=>{
+                swal.fire({
+                    text:data.message,
+                    icon:"error"
+                })
+                })
         }
 
         const {id, staffid, fname, lname, email} = this.props.staff;
@@ -32,8 +46,8 @@ class Staff extends Component {
                 <td>{`${lname} ${fname}`}</td>
                 <td>{email}</td>
                 <td>
-                    <a href={`/viewstaff/${id}`} className="mini ui primary button">View</a>
-                    <button onClick={(e) => deleteStudent(e, id)} className="mini ui red button">Delete</button>
+                    <a href={`/viewstaff/${id}`} className="btn btn-primary btn-sm mx-2">View</a>
+                    <button onClick={(e) => deleteStudent(e, id)} className="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         );

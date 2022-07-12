@@ -1,96 +1,79 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import "./app.css";
+import axios from 'axios';
+import { useParams } from 'react-router-dom'
+import Loader from './Loader';
 
 
 function Viewform(props) {
-    
-        const {staffid, fname, lname, phone, email} = props.staff;
+    const { id } = useParams()
+    console.log(id)
+    const [image, setImage] = useState([]);
+    const [loader, setLoader] = useState(false);
+    const [URL, setURL] = useState(`http://localhost:8000/api/image/${id}`);
 
-        return(
-            <form> 
-                <div className="field"> 
-                <label>Staff Id: {staffid}</label>		          
-                </div>
+    useEffect(()=>{
+        setLoader(true);
+        axios.get(URL).then((response)=>{
+            console.log(response.data.image);
+            setImage(response.data.image);
+            setLoader(false);
+        }).catch((error)=>{
+            console.log(error)
+        });
+    }, [])
 
-                <div className="field">
-                <label>First Name</label>   				         
-                <input type="text" placeholder="Enter first name" name="fname" defaultValue={fname} readOnly/>
-                <span className="ui red"></span>
-                </div>
+    if(loader){
+        return <Loader />
+    }
 
-                <div className="field">
-                <label>Last Name</label>
-                <input type="text" placeholder="Enter last name" name="lname" defaultValue={lname} readOnly/>
-                <span className="ui red"></span>
-                </div>
+    const {staffid, fname, lname, phone, email} = props.staff;
 
-                <div className="field">
-                <label>Phone Number</label>
-                <input type="text" placeholder="Enter phone number" name="phone" defaultValue={phone} readOnly/>
-                <span className="ui red"></span>
-                </div>
+    return(
+        <form> 
+            <div className="field"> 
+            <label>Staff Id: {staffid}</label>		          
+            </div>
 
-                <div className="field">
-                <label>E-Mail</label>
-                <input type="email" placeholder="joe@gmail.com" name="email" defaultValue={email} readOnly/>
-                <span className="ui red"></span>
-                </div>
+            {
+                image.length > 0 && (
+                    image.map((row, key)=>(
+                        <div key={key} className="field">
+                            <label>Image:</label>         
+                            <img width="200px" src={`http://localhost:8000/storage/product/image/${row.image}` } />
+                        </div>
+                    ))
+                ) 
+            }
 
-                {/* <div className="field">
-                <label>Image</label>
-                <span>{image_name}</span>
-                </div> */}
-                                                                           
-                {/* <button type="submit" className="ui primary button">Update Staff</button> */}
+            <a href={`/image/${id}`} className="">Upload Image</a>
 
-            </form>
-        );
+            <div className="field mt-2">
+            <label>First Name</label>   				         
+            <input type="text" placeholder="Enter first name" name="fname" defaultValue={fname} readOnly/>
+            <span className="ui red"></span>
+            </div>
+
+            <div className="field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Enter last name" name="lname" defaultValue={lname} readOnly/>
+            <span className="ui red"></span>
+            </div>
+
+            <div className="field">
+            <label>Phone Number</label>
+            <input type="text" placeholder="Enter phone number" name="phone" defaultValue={phone} readOnly/>
+            <span className="ui red"></span>
+            </div>
+
+            <div className="field">
+            <label>E-Mail</label>
+            <input type="email" placeholder="joe@gmail.com" name="email" defaultValue={email} readOnly/>
+            <span className="ui red"></span>
+            </div>
+
+        </form>
+    );
     }
     
 export default Viewform;
-
-
-
-
-    // const [staffInput, setStaff] = useState([]);
-    // const [errorInput, setError] = useState([]);
-    // const { id } = useParams();
-    // const handleInput = (e) => {
-    //     e.persist();
-    //     setStaff({...staffInput, [e.target.name]: e.target.value });
-    // }
-
-    // const updateStaff = (e) => {
-    //     e.preventDefault();
-    //     var axios = require('axios');
-    //     var FormData = require('form-data');
-    //     var data = new FormData();
-    //     data.append('fname', staffInput.fname);
-    //     data.append('lname', staffInput.lname);
-    //     data.append('phone', staffInput.phone);
-    //     data.append('email', staffInput.email);
-
-    //     var config = {
-    //     method: 'put',
-    //     url: `http://127.0.0.1:8000/api/staffupdate/${id}`,
-    //     headers: { 
-    //         'Accept': 'application/json', 
-    //     },
-    //     data : data
-    //     };
-        
-    //     axios(config)
-    //     .then(function (response) {
-    //     console.log(response);
-    //         if(response.data.status === 200){
-    //         Swal.fire("Success",response.data.message,"success");
-    //         }
-    //         else if(response.data.status === 404){
-    //             Swal.fire("Error",response.data.message,"error");
-    //         }
-    //     })
-    //     .catch(function (error) {
-    //     console.log(error);
-    //     });
-
-    // }

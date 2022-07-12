@@ -4,9 +4,8 @@ import "./app.css";
 
 function Register() {
 
-
     return(
-        <div className="container body">   
+        <div className="container">   
         <div className='display-3 mb-3 center'>Registration Form</div>         
             <div className="ui form">
                 <form className='w-50'>         

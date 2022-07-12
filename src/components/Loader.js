@@ -5,7 +5,6 @@ class Loader extends Component {
         return (
             <div className="ui active inverted dimmer">
                 <div className="ui loader"></div>
-                {/*   */}
             </div>
         );
     }
