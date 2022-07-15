@@ -59,14 +59,16 @@ function Home() {
 
     return (
         <div>
-            <div className="ui fixed inverted menu">
+            <div className="ui fixed inverted menu pb-1 pt-1">
                 <div className="ui container">                
-                    <p className="header item">All Staff</p>
-                    <a className="ui primary button" href='/Addstaff'>Add Staff</a>                                                   
+                    <p className="header item">Isabel College</p>
+                    <a className="ui primary button" href='/Addstaff'>Add Staff</a>
+                    <a href='/activitylog' className="ui info button">Activity Log</a>
                     <button type="button" onClick={logoutSubmit} className="btn btn-danger" href='/Logout'>Logout</button>                                                   
                 </div>
             </div>
             <div className="ui container body">
+                <p className="display-5 center">All Staff</p>
                 <Stafflist staffs={staff}/>
             </div>           
         </div>

@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Addstaff from './Addstaff';
 import Viewstaff from './Viewstaff';
 import Register from './Register';
+import Activitylog from './Activitylog';
 import Login from './Login';
 import Image from './Image';
 import axios from 'axios';
@@ -28,6 +29,7 @@ export default function App() {
                 <Route path="/viewstaff/:id" element={<Viewstaff />} ></Route>
                 <Route path='/addstaff' element={<Addstaff />} ></Route>
                 <Route path='/home' element={<Home />} />
+                <Route path='/activitylog' element={<Activitylog />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/image/:id' element={<Image />} />
                 <Route path='*' element={<Login />} />

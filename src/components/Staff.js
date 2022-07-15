@@ -4,7 +4,7 @@ import swal from "sweetalert2";
 
 class Staff extends Component {
     render() { 
-        const deleteStudent = async (e, id) => {
+        const deleteStaff = async (e, id) => {
         e.preventDefault();
         
         const thisClicked = e.currentTarget;
@@ -47,7 +47,7 @@ class Staff extends Component {
                 <td>{email}</td>
                 <td>
                     <a href={`/viewstaff/${id}`} className="btn btn-primary btn-sm mx-2">View</a>
-                    <button onClick={(e) => deleteStudent(e, id)} className="btn btn-danger btn-sm">Delete</button>
+                    <button onClick={(e) => deleteStaff(e, id)} className="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         );
