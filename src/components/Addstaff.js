@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import "./app.css";
 import swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 function Addstaff() {
     const navigate = useNavigate();
+    // const { id } = useParams();
+    // console.log(id)
     const [staffInput, setStaff] = useState({
         fname: '',
         lname: '',
+        gender: '',
+        sec: '',
+        subject: '',
         phone: '',
         email: '',
-        password: '',
         error_list: [],
     });
     const [errorMessages, setErrorMessages] = useState({})
@@ -27,9 +31,11 @@ function Addstaff() {
         var data = new FormData();
         data.append('fname', staffInput.fname);
         data.append('lname', staffInput.lname);
+        data.append('gender', staffInput.gender);
+        data.append('sec', staffInput.sec);
+        data.append('subject', staffInput.subject);
         data.append('phone', staffInput.phone);
         data.append('email', staffInput.email);
-        data.append('password', staffInput.password);
         
         var config = {
           method: 'post',
@@ -49,12 +55,14 @@ function Addstaff() {
             setStaff({
                 fname: '',
                 lname: '',
+                gender: '',
+                sec: '',
+                subject: '',
                 phone: '',
                 email: '',
-                password: '',
                 errorMessages: []
             });
-            navigate('/home');
+            navigate(`/home`);
             
         }
         else if(response.status === 401)
@@ -72,44 +80,57 @@ function Addstaff() {
         <div className="design">
             <div className="ui fixed inverted menu">
                 <div className="container">                
-                    <p className="header item">Registration Form</p>
+                    <p className="header item">Isabel College</p>
                     <a className='ui primary button' href='/Home'>Go back</a>                                               
                 </div>
             </div>
+            <p className="display-4 center body">Registration Form</p>
             
-            <div className="ui container body">            
+            <div className="ui container">            
                 <div className="ui form">
                     <form onSubmit={saveStaff}> 
 
                         <div className="field">
                         <label>First Name</label>   				         
-                        <input type="text" placeholder="Enter first name" name="fname" onChange={handleInput} value={staffInput.fname} required/>
+                        <input type="text" placeholder="Enter first name" name="fname" onChange={handleInput} value={staffInput.fname} />
                         <span className="ui red">{errorMessages?.fname}</span>
                         </div>
 
                         <div className="field">
                         <label>Last Name</label>
-                        <input type="text" placeholder="Enter last name" name="lname" onChange={handleInput} value={staffInput.lname} required/>
+                        <input type="text" placeholder="Enter last name" name="lname" onChange={handleInput} value={staffInput.lname} />
                         <span className="ui red">{errorMessages?.lname}</span>
                         </div>
 
                         <div className="field">
+                        <label>Gender</label>
+                        <input type="text" placeholder="M/F" name="gender" onChange={handleInput} value={staffInput.gender} />
+                        <span className="ui red">{errorMessages?.gender}</span>
+                        </div>
+
+                        <div className="field">
+                        <label>Section</label>
+                        <input type="text" placeholder="admin, academic, others" name="sec" onChange={handleInput} value={staffInput.sec} />
+                        <span className="ui red">{errorMessages?.sec}</span>
+                        </div>
+
+                        <div className="field">
+                        <label>Subject/Position</label>
+                        <input type="text" placeholder="secretary, mathematics, ....." name="subject" onChange={handleInput} value={staffInput.subject} />
+                        <span className="ui red">{errorMessages?.subject}</span>
+                        </div>
+
+                        <div className="field">
                         <label>Phone Number</label>
-                        <input type="text" placeholder="Enter phone number" name="phone" onChange={handleInput} value={staffInput.phone} required/>
+                        <input type="text" placeholder="Enter phone number" name="phone" onChange={handleInput} value={staffInput.phone} />
                         <span className="ui red">{errorMessages?.phone}</span>
                         </div>
 
                         <div className="field">
                         <label>E-Mail</label>
-                        <input type="email" placeholder="joe@gmail.com" name="email" onChange={handleInput} value={staffInput.email} required/>
+                        <input type="email" placeholder="joe@gmail.com" name="email" onChange={handleInput} value={staffInput.email} />
                         <span className="ui red">{errorMessages?.email}</span>
                         </div>
-
-                        <div className="field">
-                        <label>Password</label>
-                        <input type="password" placeholder="Enter password" name="password" onChange={handleInput} value={staffInput.password} required/> 
-                        <span className="ui red">{errorMessages?.password}</span>
-                        </div>  
 
                         <button type="submit" className="btn btn-primary">Save Staff</button>
 

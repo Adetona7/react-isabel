@@ -36,9 +36,14 @@ label{
     font: bolder;
 }
 a{
-    font-family: cursive;
+    font-family: 'Kanit', sans-serif;
 }
 
 .center{
     text-align: center;
+    border-radius: 15px;
+}
+
+.text{
+    font-family: 'Kanit', sans-serif;
 }

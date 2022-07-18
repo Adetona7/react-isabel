@@ -22,57 +22,83 @@ function Viewform(props) {
             console.log(error)
         });
     }, [])
-
+      
     if(loader){
         return <Loader />
     }
 
-    const {staffid, fname, lname, phone, email} = props.staff;
+    const {staffid, fname, lname, gender, sec, subject, phone, email} = props.staff;
 
     return(
-        <form> 
-            <div className="field"> 
-            <label>Staff Id: {staffid}</label>		          
-            </div>
 
+        <div className='row'> 
+            <div className='col-md-6'>
             {
                 image.length > 0 && (
                     image.map((row, key)=>(
                         <div key={key} className="field">
-                            <label>Image:</label>         
-                            <img width="200px" src={`http://localhost:8000/storage/product/image/${row.image}` } />
+                            <p className='display-6 text-light'>Image</p>         
+                            <img width="400" className="rounded" src={`http://localhost:8000/storage/product/image/${row.image}` } />
                         </div>
                     ))
                 ) 
             }
 
-            <a href={`/image/${id}`} className="">Upload Image</a>
-
-            <div className="field mt-2">
-            <label>First Name</label>   				         
-            <input type="text" placeholder="Enter first name" name="fname" defaultValue={fname} readOnly/>
-            <span className="ui red"></span>
             </div>
 
-            <div className="field">
-            <label>Last Name</label>
-            <input type="text" placeholder="Enter last name" name="lname" defaultValue={lname} readOnly/>
-            <span className="ui red"></span>
+            <div className='col-md-6'>
+                <form>
+                    <div className="field"> 
+                    <label>Staff Id: {staffid}</label>		          
+                    </div>
+
+                    <a href={`/image/${id}`} className="">Upload Image</a>
+
+                    <div className="field mt-2">
+                    <label>First Name</label>   				         
+                    <input type="text" defaultValue={fname} readOnly/>
+                    <span className="ui red"></span>
+                    </div>
+
+                    <div className="field">
+                    <label>Last Name</label>
+                    <input type="text" defaultValue={lname} readOnly/>
+                    <span className="ui red"></span>
+                    </div>
+
+                    <div className="field">
+                    <label>Gender</label>
+                    <input type="text" defaultValue={gender} readOnly/>
+                    <span className="ui red"></span>
+                    </div>
+
+                    <div className="field">
+                    <label>Section</label>
+                    <input type="text" defaultValue={sec} readOnly/>
+                    <span className="ui red"></span>
+                    </div>
+
+                    <div className="field">
+                    <label>Subject</label>
+                    <input type="text" defaultValue={subject} readOnly/>
+                    <span className="ui red"></span>
+                    </div>
+
+                    <div className="field">
+                    <label>Phone Number</label>
+                    <input type="text" defaultValue={phone} readOnly/>
+                    <span className="ui red"></span>
+                    </div>
+
+                    <div className="field">
+                    <label>E-Mail</label>
+                    <input type="email" defaultValue={email} readOnly/>
+                    <span className="ui red"></span>
+                    </div> 
+                </form>               
             </div>
 
-            <div className="field">
-            <label>Phone Number</label>
-            <input type="text" placeholder="Enter phone number" name="phone" defaultValue={phone} readOnly/>
-            <span className="ui red"></span>
-            </div>
-
-            <div className="field">
-            <label>E-Mail</label>
-            <input type="email" placeholder="joe@gmail.com" name="email" defaultValue={email} readOnly/>
-            <span className="ui red"></span>
-            </div>
-
-        </form>
+        </div>
     );
     }
     

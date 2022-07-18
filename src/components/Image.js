@@ -26,7 +26,7 @@ function Image() {
             icon:"success",
             text:data.message
         });
-        navigate(`/viewstaff/${id}`)
+        navigate(`/home`)
         }).catch(({response:{data}})=>{
             swal.fire({
                 text:data.message,

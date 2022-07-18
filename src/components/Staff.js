@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import swal from "sweetalert2";
 
-class Staff extends Component {
-    render() { 
+function Staff(props) {
         const deleteStaff = async (e, id) => {
         e.preventDefault();
         
@@ -38,20 +37,21 @@ class Staff extends Component {
                 })
         }
 
-        const {id, staffid, fname, lname, email} = this.props.staff;
+        const {id,staffid, fname, lname, sec, email} = props.staff;
         return (
+
             <tr>
-                <td style={{ textAlign: "center" }}>{id}</td>
+                <td style={{ textAlign: "center" }}>{id}</td>                              
                 <td>{staffid}</td>
                 <td>{`${lname} ${fname}`}</td>
+                <td>{sec}</td>
                 <td>{email}</td>
                 <td>
-                    <a href={`/viewstaff/${id}`} className="btn btn-primary btn-sm mx-2">View</a>
+                    <a href={`/viewstaff/${id}`} className="btn btn-success btn-sm mx-2">View</a>
                     <button onClick={(e) => deleteStaff(e, id)} className="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         );
-    }
 }
  
 export default Staff;

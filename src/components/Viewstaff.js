@@ -34,7 +34,7 @@ function Viewstaff() {
         <div className="design">  
             <div className="ui fixed inverted menu">
                 <div className="ui container">                
-                    <p className="header item">Edit Staff</p>
+                    <p className="header item">Isabel College</p>
                     <a className='ui primary button' href='/Home'>Go back</a>                                               
                 </div>
             </div>
