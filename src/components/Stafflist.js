@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Staff from './Staff'
 import axios from 'axios';
 import swal from "sweetalert2";
-// import { useParams } from 'react-router-dom'
 import Loader from './Loader';
 
 
@@ -44,74 +43,24 @@ function Stafflist({ staffs, data2, data3 }){
         }
 
     const [count, setCount] = useState([]);
+    const [male, setMale] = useState([]);
+    const [female, setFemale] = useState([]);
+    const [admin, setAdmin] = useState([]);
+    const [acad, setAcad] = useState([]);
+    const [others, setOthers] = useState([]);
     const [loader, setLoader] = useState(false);
-    const [url, setURL] = useState("http://127.0.0.1:8000/api/count_all_staff");
+    const [url, setURL] = useState("http://127.0.0.1:8000/api/count");
 
     useEffect(()=>{
         setLoader(true);
         axios.get(url).then((response)=>{
             console.log(response.data.count);
             setCount(response.data.count);
-            setLoader(false);
-        }).catch((error)=>{
-            console.log(error)
-        });
-    }, [])
-
-    const [count_m, setCount_m] = useState([]);
-    useEffect(()=>{
-        setLoader(true);
-        axios.get('http://127.0.0.1:8000/api/count_m').then((response)=>{
-            console.log(response.data.count_m);
-            setCount_m(response.data.count_m);
-            setLoader(false);
-        }).catch((error)=>{
-            console.log(error)
-        });
-    }, [])
-
-    const [count_f, setCount_f] = useState([]);
-    useEffect(()=>{
-        setLoader(true);
-        axios.get('http://127.0.0.1:8000/api/count_f').then((response)=>{
-            console.log(response.data.count_f);
-            setCount_f(response.data.count_f);
-            setLoader(false);
-        }).catch((error)=>{
-            console.log(error)
-        });
-    }, [])
-
-    const [count_admin, setCount_admin] = useState([]);
-    useEffect(()=>{
-        setLoader(true);
-        axios.get('http://127.0.0.1:8000/api/count_admin').then((response)=>{
-            console.log(response.data.count_admin);
-            setCount_admin(response.data.count_admin);
-            setLoader(false);
-        }).catch((error)=>{
-            console.log(error)
-        });
-    }, [])
-
-    const [count_acad, setCount_acad] = useState([]);
-    useEffect(()=>{
-        setLoader(true);
-        axios.get('http://127.0.0.1:8000/api/count_acad').then((response)=>{
-            console.log(response.data.count_acad);
-            setCount_acad(response.data.count_acad);
-            setLoader(false);
-        }).catch((error)=>{
-            console.log(error)
-        });
-    }, [])
-
-    const [count_others, setCount_others] = useState([]);
-    useEffect(()=>{
-        setLoader(true);
-        axios.get('http://127.0.0.1:8000/api/count_others').then((response)=>{
-            console.log(response.data.count_others);
-            setCount_others(response.data.count_others);
+            setMale(response.data.male);
+            setFemale(response.data.female);
+            setAdmin(response.data.admin);
+            setAcad(response.data.acad);
+            setOthers(response.data.others);
             setLoader(false);
         }).catch((error)=>{
             console.log(error)
@@ -138,7 +87,7 @@ function Stafflist({ staffs, data2, data3 }){
                     <div className='bg-secondary pt-3 pb-3 shadow-lg center'>
                         <i className="fa-solid fa-person fa-5x"  style={{ color: "white" }}></i>
                         <h2 className='mt-2 text-light'><b>MALE</b></h2>
-                        <h2 className="text-light">{count_m}</h2>
+                        <h2 className="text-light">{male}</h2>
                     </div>
                 </div>
 
@@ -146,7 +95,7 @@ function Stafflist({ staffs, data2, data3 }){
                     <div className='bg-secondary pt-3 pb-3 shadow-lg center'>
                         <i className="fa-solid fa-person-dress fa-5x" style={{ color: "white" }}></i>
                         <h2 className='mt-2 text-light'><b>FEMALE</b></h2>
-                        <h2 className="text-light">{count_f}</h2>
+                        <h2 className="text-light">{female}</h2>
                     </div>
                 </div>
 
@@ -156,21 +105,21 @@ function Stafflist({ staffs, data2, data3 }){
                 <div className='col-md-4 center'>
                     <div className='bg-light pt-3 pb-3 shadow-lg center'>
                         <h4 className=''>ACADEMIC</h4>
-                        <h4>{count_acad}</h4>
+                        <h4>{acad}</h4>
                     </div>
                 </div>
 
                 <div className='col-md-4 center'>
                     <div className='bg-light pt-3 pb-3 shadow-lg center'>
                         <h4 className=''>NON-ACADEMIC</h4>
-                        <h4>{count_admin}</h4>
+                        <h4>{admin}</h4>
                     </div>
                 </div>
 
                 <div className='col-md-4 center'>
                     <div className='bg-light pt-3 pb-3 shadow-lg center'>
                         <h4 className=''>OTHERS</h4>
-                        <h4>{count_others}</h4>
+                        <h4>{others}</h4>
                     </div>
                 </div>
             </div>
