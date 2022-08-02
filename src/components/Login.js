@@ -58,8 +58,8 @@ function Login() {
     }
 
     return(
-        <div className="container">    
-            <div className='display-3 mb-4 center'>Login Form</div>
+        <div className="container m-auto">    
+            <div className='display-3 mb-4'>Login Form</div>
                 <div className="ui form">
                     <form onSubmit={loginSubmit}>         
                         <div className="field">

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import swal from "sweetalert2";
 
-function Staff(props) {
-        const deleteStaff = async (e, id) => {
+function All(props) {
+    const deleteStaff = async (e, id) => {
         e.preventDefault();
         
         const thisClicked = e.currentTarget;
@@ -36,21 +36,30 @@ function Staff(props) {
                 })
                 })
         }
-
-        const {id, staffid, fname, lname, sec, email} = props.staff;
+    
+    const {id, staffid, fname, lname, gender, sec, subject, email} = props.staff;
         return (
 
             <tr>
-                <td style={{ textAlign: "center" }}>{id}</td>                              
-                <td>{staffid}</td>
-                <td>{`${fname}`}</td>
+                <td>{id}</td>
+                <td>{staffid}</td>                              
+                <td>{`${lname} ${fname}`}</td>
+                <td>{gender}</td>
+                <td>{sec}</td>
+                <td>{subject}</td>
                 <td>{email}</td>
                 <td>
-                    <a href={`/viewstaff/${id}`} className="btn btn-primary btn-sm mx-2">View</a>
-                    <button onClick={(e) => deleteStaff(e, id)} className="btn btn-danger btn-sm">Delete</button>
+                    <div className="dropdown">
+                        <a className="fa fa-ellipsis-v" data-bs-toggle="dropdown" style={{ textDecoration: "none" }}></a>
+                        <ul className="dropdown-menu rounded-3">
+                            <li><a className="dropdown-item btn" href={`/Editstaff/${id}`}>Edit</a></li>
+                            <li><a className="dropdown-item btn" href={`/viewstaff/${id}`}>View</a></li>
+                            <li><button className="dropdown-item btn" onClick={(e) => deleteStaff(e, id)} href="#">Delete</button></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         );
 }
  
-export default Staff;
+export default All;

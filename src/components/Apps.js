@@ -9,7 +9,8 @@ import Activitylog from './Activitylog';
 import Login from './Login';
 import Image from './Image';
 import axios from 'axios';
-import Viewform from './Viewform';
+import Editstaff from './Editstaff';
+import View from './View';
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -27,6 +28,8 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/viewstaff/:id" element={<Viewstaff />} ></Route>
+                <Route path="/view" element={<View />} ></Route>
+                <Route path="/editstaff/:id" element={<Editstaff />} ></Route>
                 <Route path='/addstaff' element={<Addstaff />} ></Route>
                 <Route path='/home' element={<Home />} />
                 <Route path='/activitylog' element={<Activitylog />} />

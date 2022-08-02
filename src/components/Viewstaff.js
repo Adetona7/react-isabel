@@ -32,11 +32,23 @@ function Viewstaff() {
     
     return (
         <div className="design">  
-            <div className="ui fixed inverted menu">
-                <div className="ui container">                
-                    <p className="header item">Isabel College</p>
-                    <a className='ui primary button' href='/Home'>Go back</a>                                               
-                </div>
+            <div className="ui fixed inverted menu pb-2 pt-2 bg-light">
+                <div className="container"> 
+                    <div className="col-md-8">
+                        <p className="header item text-black">Isabel College</p>
+                    </div>
+
+                    <div className="col-md-2">
+                        <i className="fa-solid fa-circle-user fa-2x me-2 pt-2 float-end"></i>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="">
+                            <p><b>Adetona Oluwabukunmi.<p>Developer.</p></b></p>
+                        </div>                              
+                    </div>
+
+                </div>               
             </div>
             <div className="ui container body">            
                 <div className="ui form">
